@@ -1,7 +1,24 @@
-# CI_CD_PIPELINE
-MAINTAINER "DEVOPS with KK"
+Launch an EC2 instance for Docker host
 
-# copy war file on to container
+Install docker on EC2 instance and start services
+
+yum install docker
+service docker start
+create a new user for Docker management and add him to Docker (default) group
+useradd dockeradmin
+passwd dockeradmin
+usermod -aG docker dockeradmin
+Write a Docker file under /opt/docker
+mkdir /opt/docker
+
+### vi Dockerfile
+# Pull base image 
+From tomcat:9-jre9 
+
+# Maintainer
+MAINTAINER "DEVOPS with KK" 
+
+# copy war file on to container 
 COPY ./webapp.war /usr/local/tomcat/webapps
 Login to Jenkins console and add Docker server to execute commands from Jenkins
 Manage Jenkins --> Configure system --> Publish over SSH --> add Docker server and credentials
@@ -36,4 +53,3 @@ check images and containers again on Docker host on AWS EC2. This time an image 
 Access web application from browser which is running on container
 
 <docker_host_Public_IP>:8090
-
